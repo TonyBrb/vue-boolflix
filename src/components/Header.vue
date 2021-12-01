@@ -2,15 +2,20 @@
   <div>
     <span>BOOLFLIX</span>
     <div class="search-bar">
-      <input type="text" placeholder="Inserisci il film da cercare">
-      <button class="btn">Cerca</button>
+      <input type="text" v-model="text" placeholder="Inserisci il film da cercare">
+      <button class="btn" @click="$emit('textToSearch', text)">Cerca</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  data(){
+    return{
+      text:''
+    }
+  }
 }
 </script>
 
@@ -21,6 +26,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     span{
       font-size: 48px;
       color: red;
@@ -28,7 +34,10 @@ export default {
     }
     
     button{
-      padding: 11px;
+      padding: 12px;
+      background-color: red;
+      color: white;
+      border: none;
     }
 
     input{
