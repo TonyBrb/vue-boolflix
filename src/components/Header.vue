@@ -21,7 +21,8 @@ export default {
 
 <style lang="scss" scoped>
   div{
-    height: 50px;
+    height: 70px;
+    margin-bottom: 0;
     background-color: black;
     display: flex;
     align-items: center;

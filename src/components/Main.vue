@@ -6,11 +6,14 @@ Voto
  */
 
 <template>
-  <div>
+  <main>
     <ul>
       <h1 v-if="showFilm==true">Film</h1>
       <li v-for="film in searched_Film"
       :key="film.id">
+        <div class="cover">
+          <img :src='`https://image.tmdb.org/t/p/w342/${film.backdrop_path}`'  alt=''>
+        </div>
         <h3>Titolo:</h3> 
         <h5>{{film.title}}</h5>
         <h3>Titolo Originale:</h3>
@@ -27,13 +30,60 @@ Voto
           <h3>Lingua:</h3>
           {{film.original_language}}
         </div>
-        <h3>Voto:</h3> {{film.vote_average}}
+        <h3>Voto:</h3> 
+        <h5>{{film.vote_average/2}}
+        </h5>
+        <div class="star" v-if="(film.vote_average/2) == 0">
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="star" v-if="(film.vote_average/2) >= 1 && (film.vote_average/2) < 2">
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="star" v-if="(film.vote_average/2) >= 2 && (film.vote_average/2) < 3">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="star" v-if="(film.vote_average/2) >= 3 && (film.vote_average/2) < 4">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="star" v-if="(film.vote_average/2) >= 4 && (film.vote_average/2) < 5">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="star" v-if="(film.vote_average/2) == 5">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
       </li>
 
       <h1 v-if="showSerie==true">Serie</h1>
 
       <li v-for="series in searched_Series"
       :key="series.id">
+        <div class="cover">
+          <img :src='`https://image.tmdb.org/t/p/w342/${series.backdrop_path}`' alt=''>
+        </div>
         <h3>Titolo:</h3> 
         <h5>{{series.name}}</h5>
         <h3>Titolo Originale:</h3>
@@ -50,10 +100,53 @@ Voto
           <h3>Lingua:</h3>
           {{series.original_language}}
         </div>
-        <h3>Voto:</h3> {{series.vote_average}}
+        <h3>Voto:</h3> 
+        <h5>{{series.vote_average/2}}</h5> 
+         <div class="star" v-if="(series.vote_average/2) == 0">
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="star" v-if="(series.vote_average/2) >= 1 && (series.vote_average/2) < 2">
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="star" v-if="(series.vote_average/2) >= 2 && (series.vote_average/2) < 3">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="star" v-if="(series.vote_average/2) >= 3 && (series.vote_average/2) < 4">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="star" v-if="(series.vote_average/2) >= 4 && (series.vote_average/2) < 5">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="star" v-if="(series.vote_average/2) == 5">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
       </li>
     </ul>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -71,7 +164,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  div{
+  main{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-top: -16px;
     background-color: #282C34;
@@ -84,9 +177,26 @@ export default {
       color: red;
     }
 
+    h5{
+      margin-top: 0;
+    }
+
+
+    li{
+      width: 342px;
+      border: 1px solid white;
+      margin-bottom: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .star{
+        margin-bottom: 20px;
+      }
+    }
+
     .lingua{
       width: 80px;
-      height: 35px;
       img{
         width: 100%;
         margin-top: 10px;

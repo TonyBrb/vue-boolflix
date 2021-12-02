@@ -64,5 +64,10 @@ export default {
 </script>
 
 <style lang="scss">
+  div{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
 </style>
