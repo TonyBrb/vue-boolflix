@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header @textToSearch="filmToSearch"/>
-    <Main :searched_Film="array_film"/>
+    <Main :searched_Film="array_film" :searched_Series="array_series" :showFilm="showFilm" :showSerie="showSerie"/>
   </div>
 </template>
 
@@ -20,9 +20,13 @@ export default {
   },
   data(){
     return{
-      apiURL:'https://api.themoviedb.org/3/search/movie?api_key=927cd3cd4af5831d64e0b7aa05687c5b&language=it-IT&query',
+      apiURLFilm:'https://api.themoviedb.org/3/search/movie?api_key=927cd3cd4af5831d64e0b7aa05687c5b&language=it-IT&query',
+      apiURLSeries: 'https://api.themoviedb.org/3/search/tv?api_key=927cd3cd4af5831d64e0b7aa05687c5b&language=it-IT&query',
       film_name:'',
-      array_film:[]
+      array_film:[],
+      array_series: [],
+      showFilm: false,
+      showSerie: false
     }
   },
   methods:{
@@ -32,15 +36,25 @@ export default {
       this.getApi();
     },
     getApi(){
-      axios.get(`${this.apiURL}=${this.film_name}`)
-      .then( r =>{
-        //console.log(r.data.results);
+      axios.get(`${this.apiURLFilm}=${this.film_name}`)
+      .then(r =>{
         this.array_film = r.data.results;
+        if(this.array_film.length > 0) this.showFilm=true;
         console.log(this.array_film);
       })
       .catch( e =>{
         console.log(e);
+      });
+      axios.get(`${this.apiURLSeries}=${this.film_name}`)
+      .then(r =>{
+        this.array_series = r.data.results;
+        if(this.array_series.length > 0) this.showSerie=true;
+        console.log(this.array_series);
       })
+      .catch( e =>{
+        console.log(e);
+      });
+
     }
   },
   mounted(){
