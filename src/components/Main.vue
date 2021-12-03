@@ -115,7 +115,7 @@ export default {
   main{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: #282C34;
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 50px);
     color: white;
 
     .container{
