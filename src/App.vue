@@ -48,7 +48,7 @@ export default {
       axios.get(`${this.apiURLSeries}=${this.film_name}`)
       .then(r =>{
         this.array_series = r.data.results;
-        if(this.array_series.length > 0) this.showSerie=true;
+        if(this.array_series.length != 0) this.showSerie=true;
         console.log(this.array_series);
       })
       .catch( e =>{
@@ -56,9 +56,6 @@ export default {
       });
 
     }
-  },
-  mounted(){
-    // this.getApi();
   }
 }
 </script>
@@ -68,6 +65,7 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #282C34;
   }
 
 </style>

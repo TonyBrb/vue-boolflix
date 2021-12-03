@@ -1,6 +1,8 @@
 <template>
   <div>
-    <span>BOOLFLIX</span>
+    <div class="logo">
+      <img src="../assets/img/boolflix-logo.png" alt="Boolflix">
+    </div>
     <div class="search-bar">
       <input type="text" v-model="text" placeholder="Inserisci il film da cercare">
       <button class="btn" @click="$emit('textToSearch', text)">Cerca</button>
@@ -21,17 +23,19 @@ export default {
 
 <style lang="scss" scoped>
   div{
-    height: 70px;
+    height: 50px;
     margin-bottom: 0;
     background-color: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    span{
-      font-size: 48px;
-      color: red;
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    .logo{
+      width: 100px;
+      margin-left: 8%;
+      img{
+        width: 100%;
+      }
     }
     
     button{

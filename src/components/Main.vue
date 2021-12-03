@@ -7,74 +7,93 @@ Voto
 
 <template>
   <main>
-    <ul>
-      <h1 v-if="showFilm==true">Film</h1>
-      <li v-for="film in searched_Film"
-      :key="film.id">
-        <div class="cover">
-          <img :src='`https://image.tmdb.org/t/p/w342/${film.backdrop_path}`'  alt=''>
-        </div>
-        <h3>Titolo:</h3> 
-        <h5>{{film.title}}</h5>
-        <h3>Titolo Originale:</h3>
-        <h5>{{film.original_title}} </h5> 
-        <div class="lingua" v-if="film.original_language=='en'">
-          <h3>Lingua:</h3>
-          <img src="../assets/img/en.png" alt="">
+    <h1 v-if="showFilm==true">Film</h1>
+    <div class="container">
+    
+    <ul v-for="film in searched_Film"
+              :key="film.id">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+             <li >
+                <div class="cover">
+                  <img :src='`https://image.tmdb.org/t/p/w342/${film.backdrop_path}`' :title="film.title" :alt='film.title'>
+                </div>
+            </li>
           </div>
-        <div class="lingua" v-else-if="film.original_language=='it'">
-          <h3>Lingua:</h3> 
-          <img src="../assets/img/it.png" alt="">
-          </div> 
-        <div class="lingua" v-else>
-          <h3>Lingua:</h3>
-          {{film.original_language}}
-        </div>
-        <h3>Voto:</h3> 
-        <h5>{{Math.round(film.vote_average/2)}}</h5>
-        <div class="star">
-          <i 
-          v-for="(item,index) in 5"
-          :key="index"
-          :class="index < Math.round(film.vote_average/2) ? 'fas' : 'far'"
-          class="fa-star"></i>
-        </div>
-      </li>
-
-      <h1 v-if="showSerie==true">Serie</h1>
-
-      <li v-for="series in searched_Series"
-      :key="series.id">
-        <div class="cover">
-          <img :src='`https://image.tmdb.org/t/p/w342/${series.backdrop_path}`' alt=''>
-        </div>
-        <h3>Titolo:</h3> 
-        <h5>{{series.name}}</h5>
-        <h3>Titolo Originale:</h3>
-        <h5>{{series.original_name}} </h5> 
-        <div class="lingua" v-if="series.original_language=='en'">
-          <h3>Lingua:</h3>
-          <img src="../assets/img/en.png" alt="">
+          <div class="flip-card-back">
+             <li>
+                  <span><strong>Titolo:</strong> {{film.title}}</span> <br>
+                  <span><strong>Titolo originale:</strong> {{film.original_title}}</span> <br>
+                  <span><strong>Lingua:</strong></span>
+                  <div class="lingua" v-if="film.original_language=='en'">
+                    <img src="../assets/img/en.png" alt="">
+                    </div> 
+                  <div class="lingua" v-else-if="film.original_language=='it'">
+                    <span><strong>Lingua:</strong></span> 
+                    <img src="../assets/img/it.png" alt="">
+                    </div> 
+                  <div class="lingua" v-else>
+                    <span><strong>Lingua:</strong> {{film.original_language}}</span>
+                  </div><br>
+                  <span><strong>Voto:</strong> {{Math.round(film.vote_average/2)}}</span>
+                  <div class="star">
+                    <i 
+                    v-for="(item,index) in 5"
+                    :key="index"
+                    :class="index < Math.round(film.vote_average/2) ? 'fas' : 'far'"
+                    class="fa-star"></i>
+                  </div>
+                  <span><strong>Overview:</strong> {{film.overview}}</span>
+             </li>
           </div>
-        <div class="lingua" v-else-if="series.original_language=='it'">
-          <h3>Lingua:</h3> 
-          <img src="../assets/img/it.png" alt="">
-          </div> 
-        <div class="lingua" v-else>
-          <h3>Lingua:</h3>
-          {{series.original_language}}
         </div>
-        <h3>Voto:</h3> 
-        <h5>{{Math.round(series.vote_average/2)}}</h5> 
-         <div class="star">
-          <i 
-          v-for="(item,index) in 5"
-          :key="index"
-          :class="index < Math.round(series.vote_average/2) ? 'fas' : 'far'"
-          class="fa-star"></i>
-        </div>
-      </li>
-    </ul>
+      </div>
+      </ul>
+      </div>
+      <h1 v-if="showSerie==true">Serie TV</h1>
+      <div class="container">
+       <ul v-for="series in searched_Series"
+          :key="series.id">
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <li >
+                      <div class="cover">
+                        <img :src='`https://image.tmdb.org/t/p/w342/${series.backdrop_path}`' :title="series.name" :alt='series.name'>
+                      </div>
+                  </li>
+                </div>
+              <div class="flip-card-back">
+                <li>
+                  <span><strong>Titolo:</strong> {{series.name}}</span> <br>
+                  <span><strong>Titolo originale:</strong> {{series.original_name}}</span> <br>
+                  <span><strong>Lingua:</strong></span>
+                  <div class="lingua" v-if="series.original_language=='en'">
+                    <img src="../assets/img/en.png" alt="">
+                    </div> 
+                  <div class="lingua" v-else-if="series.original_language=='it'">
+                    <h3>Lingua:</h3> 
+                    <img src="../assets/img/it.png" alt="">
+                    </div> 
+                  <div class="lingua" v-else>
+                    <span><strong>Lingua:</strong> {{series.original_language}}</span>
+                  </div><br>
+                  <span><strong>Voto:</strong> {{Math.round(series.vote_average/2)}}</span>
+                  <div class="star">
+                    <i 
+                    v-for="(item,index) in 5"
+                    :key="index"
+                    :class="index < Math.round(series.vote_average/2) ? 'fas' : 'far'"
+                    class="fa-star"></i>
+                  </div>
+                  <span><strong>Overview:</strong> {{series.overview}}</span>
+                </li>
+                </div>
+              </div>
+            </div>
+      </ul>
+      </div>
   </main>
 </template>
 
@@ -95,10 +114,20 @@ export default {
 <style lang="scss" scoped>
   main{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin-top: -16px;
     background-color: #282C34;
-    min-height: calc(100vh - 50px);
+    min-height: calc(100vh - 100px);
     color: white;
+
+    .container{
+      width: 90%;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+    }
+
+    h1{
+      margin-left: 8%;
+    }
 
     h3{
       margin: 0;
@@ -110,26 +139,82 @@ export default {
       margin-top: 0;
     }
 
+    ul{
+      list-style: none;
+    }
 
     li{
       width: 342px;
-      border: 1px solid white;
-      margin-bottom: 100px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      height: 300px;
+      border-top-radius: 20px;
+      text-align: initial;
+      overflow: auto;
       .star{
         margin-bottom: 20px;
+      }
+
+      span{
+        strong{
+          color: red;
+        }
       }
     }
 
     .lingua{
-      width: 80px;
+      display: inline-block;
+      width: 15px;
       img{
         width: 100%;
         margin-top: 10px;
       }
     }
+
+    .cover{
+      img{
+        border-radius: 20px;
+      }
+    }
+
+
+    .flip-card {
+  background-color: transparent;
+  width: 342px;
+  min-height: 300px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+  cursor: pointer;
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}
   }
 </style>
